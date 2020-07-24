@@ -51,7 +51,7 @@ func resourceAwsTransferUser() *schema.Resource {
 				Type:          schema.TypeList,
 				Optional:      true,
 				MaxItems:      50,
-				ConflictsWith: []string{"home_directory", "policy"},
+				ConflictsWith: []string{"home_directory"},
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
 						"entry": {
