@@ -71,7 +71,6 @@ func resourceAwsTransferUser() *schema.Resource {
 			"policy": {
 				Type:             schema.TypeString,
 				Optional:         true,
-				ConflictsWith:    []string{"home_directory_mappings"},
 				ValidateFunc:     validateIAMPolicyJson,
 				DiffSuppressFunc: suppressEquivalentAwsPolicyDiffs,
 			},
