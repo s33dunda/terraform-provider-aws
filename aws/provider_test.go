@@ -41,17 +41,17 @@ func init() {
 				*providers = append(*providers, p)
 				return p, nil
 			},
-			"aws.east": func() (*schema.Provider, error) {
+			"awseast": func() (*schema.Provider, error) {
 				p := Provider()
 				*providers = append(*providers, p)
 				return p, nil
 			},
-			"aws.west": func() (*schema.Provider, error) {
+			"awswest": func() (*schema.Provider, error) {
 				p := Provider()
 				*providers = append(*providers, p)
 				return p, nil
 			},
-			"aws.alternate": func() (*schema.Provider, error) {
+			"awsalternate": func() (*schema.Provider, error) {
 				p := Provider()
 				*providers = append(*providers, p)
 				return p, nil
@@ -66,17 +66,17 @@ func init() {
 				*providers = append(*providers, p)
 				return p, nil
 			},
-			"aws.alternateaccountsameregion": func() (*schema.Provider, error) {
+			"awsalternateaccountsameregion": func() (*schema.Provider, error) {
 				p := Provider()
 				*providers = append(*providers, p)
 				return p, nil
 			},
-			"aws.sameaccountalternateregion": func() (*schema.Provider, error) {
+			"awssameaccountalternateregion": func() (*schema.Provider, error) {
 				p := Provider()
 				*providers = append(*providers, p)
 				return p, nil
 			},
-			"aws.third": func() (*schema.Provider, error) {
+			"awsthird": func() (*schema.Provider, error) {
 				p := Provider()
 				*providers = append(*providers, p)
 				return p, nil
@@ -588,7 +588,7 @@ func testAccOrganizationsEnabledPreCheck(t *testing.T) {
 func testAccAlternateAccountProviderConfig() string {
 	//lintignore:AT004
 	return fmt.Sprintf(`
-provider "aws.alternate" {
+provider "awsalternate" {
   access_key = %[1]q
   profile    = %[2]q
   secret_key = %[3]q
@@ -599,7 +599,7 @@ provider "aws.alternate" {
 func testAccAlternateAccountAlternateRegionProviderConfig() string {
 	//lintignore:AT004
 	return fmt.Sprintf(`
-provider "aws.alternate" {
+provider "awsalternate" {
   access_key = %[1]q
   profile    = %[2]q
   region     = %[3]q
@@ -613,20 +613,20 @@ provider "aws.alternate" {
 func testAccAlternateAccountAndAlternateRegionProviderConfig() string {
 	//lintignore:AT004
 	return fmt.Sprintf(`
-provider "aws.alternateaccountalternateregion" {
+provider "awsalternateaccountalternateregion" {
   access_key = %[1]q
   profile    = %[2]q
   region     = %[3]q
   secret_key = %[4]q
 }
 
-provider "aws.alternateaccountsameregion" {
+provider "awsalternateaccountsameregion" {
   access_key = %[1]q
   profile    = %[2]q
   secret_key = %[4]q
 }
 
-provider "aws.sameaccountalternateregion" {
+provider "awssameaccountalternateregion" {
   region = %[3]q
 }
 `, os.Getenv("AWS_ALTERNATE_ACCESS_KEY_ID"), os.Getenv("AWS_ALTERNATE_PROFILE"), testAccGetAlternateRegion(), os.Getenv("AWS_ALTERNATE_SECRET_ACCESS_KEY"))
@@ -636,7 +636,7 @@ provider "aws.sameaccountalternateregion" {
 func testAccAlternateRegionProviderConfig() string {
 	//lintignore:AT004
 	return fmt.Sprintf(`
-provider "aws.alternate" {
+provider "awsalternate" {
   region = %[1]q
 }
 `, testAccGetAlternateRegion())
@@ -647,7 +647,7 @@ func testAccMultipleRegionProviderConfig(regions int) string {
 
 	//lintignore:AT004
 	fmt.Fprintf(&config, `
-provider "aws.alternate" {
+provider "awsalternate" {
   region = %[1]q
 }
 `, testAccGetAlternateRegion())
@@ -655,7 +655,7 @@ provider "aws.alternate" {
 	if regions >= 3 {
 		//lintignore:AT004
 		fmt.Fprintf(&config, `
-provider "aws.third" {
+provider "awsthird" {
   region = %[1]q
 }
 `, testAccGetThirdRegion())
